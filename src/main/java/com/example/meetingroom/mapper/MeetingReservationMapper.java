@@ -22,4 +22,7 @@ public interface MeetingReservationMapper {
             @Param("startTime") LocalTime startTime,
             @Param("endTime") LocalTime endTime
             );
+
+    // 예약 삭제
+    int deleteReservation(@Param("reservationId") Integer reservationId);
 }

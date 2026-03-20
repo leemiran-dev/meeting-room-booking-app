@@ -30,4 +30,8 @@
             AND <![CDATA[ END_TIME > CAST(#{startTime} AS TIME) ]]>
     </select>
 
+    <delete id="deleteReservation">
+        DELETE FROM MEETING_RESERVATION
+        WHERE RESERVATION_ID = #{reservationId}
+    </delete>
 </mapper>

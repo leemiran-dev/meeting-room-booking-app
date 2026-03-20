@@ -34,4 +34,12 @@ public class MeetingReservationController {
         result.put("message", "예약이 완료되었습니다!");
         return result;
     }
+    @DeleteMapping("/{id}")
+    public Map<String, String> deletedReservation(@PathVariable("id") Integer id){
+        meetingReservationService.deleteReservation(id);
+
+        Map<String, String> result = new HashMap<>();
+        result.put("message", "예약이 삭제되었습니다.");
+        return result;
+    }
 }

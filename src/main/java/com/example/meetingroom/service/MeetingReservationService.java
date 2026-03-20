@@ -37,4 +37,12 @@ public class MeetingReservationService {
     public List<MeetingReservation> getReservationByDate(LocalDate reservationDate) {
         return meetingReservationMapper.findByDate(reservationDate);
     }
+
+    public void deleteReservation(Integer reservationId){
+        int deletedCount = meetingReservationMapper.deleteReservation(reservationId);
+
+        if(deletedCount == 0){
+            throw new IllegalArgumentException("해당 예약이 존재하지 않습니다.");
+        }
+    }
 }
