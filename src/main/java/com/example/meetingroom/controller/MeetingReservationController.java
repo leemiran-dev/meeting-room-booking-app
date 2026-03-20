@@ -2,9 +2,12 @@ package com.example.meetingroom.controller;
 
 import com.example.meetingroom.service.MeetingReservationService;
 import com.example.meetingroom.domain.MeetingReservation;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -17,6 +20,12 @@ public class MeetingReservationController {
         this.meetingReservationService = meetingReservationService;
     }
 
+    @GetMapping
+    public List<MeetingReservation> getReservations(
+        @RequestParam("date") @DateTimeFormat(pattern="yyyy-MM-dd") LocalDate date)
+    {
+        return meetingReservationService.getReservationByDate(date);
+    }
     @PostMapping
     public Map<String, String> createReservation(@RequestBody MeetingReservation reservation){
         meetingReservationService.createReservation(reservation);

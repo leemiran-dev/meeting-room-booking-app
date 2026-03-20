@@ -13,4 +13,11 @@
         )
     </insert>
 
+    <select id="findByDate" resultType="meetingReservation">
+        SELECT
+            RESERVATION_ID, ROOM_ID, RESERVER_NAME, RESERVATION_DATE, START_TIME, END_TIME
+        FROM MEETING_RESERVATION
+        WHERE RESERVATION_DATE = #{reservationDate}
+        ORDER BY START_TIME
+    </select>
 </mapper>
