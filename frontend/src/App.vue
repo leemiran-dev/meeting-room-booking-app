@@ -51,6 +51,7 @@
           <th>예약일</th>
           <th>예약 시작 시간</th>
           <th>예약 종료 시간</th>
+          <th>비고</th>
         </tr>
       </thead>
       <tbody>
@@ -61,6 +62,7 @@
           <td>{{reservation.reservationDate}}</td>
           <td>{{reservation.startTime}}</td>
           <td>{{reservation.endTime}}</td>
+          <td><v-btn color="error" small @click="deleteReservation(reservation.reservationId)">삭제</v-btn></td>
         </tr>
       </tbody>
     </v-simple-table>
@@ -196,6 +198,26 @@ export default {
           alert(error.response.data.error);
         }else {
           alert("예약 생성 실패");
+        }
+      }
+    },
+
+    // 예약 삭제
+    async deleteReservation(reservationId) {
+      if(!confirm("정말 삭제하시겠습니까?")) return;
+
+      try {
+        await axios.delete(`http://localhost:8080/api/reservations/${reservationId}`);
+
+        alert("삭제 완료");
+        this.loadReservations();
+      }catch(error){
+        console.error(error);
+
+        if(error.response && error.response.data && error.response.data.error){
+          alert(error.response.data.error);
+        }else{
+          alert("예약 삭제 실패");
         }
       }
     }
